@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'ubuntu:latest'
+            image 'alpine:latest'
         }
     }
     
@@ -14,7 +14,8 @@ pipeline {
         
         stage('prerequisites') {
             steps {
-                sh "sudo apk --no-cache add curl"
+                sh "apt-get install sudo"
+                sh "sudo apt install curl"
                 sh "curl -o terraform.zip https://releases.hashicorp.com/terraform/0.12.19/terraform_0.12.19_linux_amd64.zip"
                 sh "unzip -o terraform.zip"
                 sh "sudo mv terraform /usr/bin"
