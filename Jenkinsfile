@@ -14,7 +14,7 @@ pipeline {
         
         stage('prerequisites') {
             steps {
-                sh "apt-get install sudo"
+                sh "apt install sudo"
                 sh "sudo apt install curl"
                 sh "curl -o terraform.zip https://releases.hashicorp.com/terraform/0.12.19/terraform_0.12.19_linux_amd64.zip"
                 sh "unzip -o terraform.zip"
