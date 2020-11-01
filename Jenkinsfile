@@ -8,17 +8,25 @@ pipeline {
         }
         stage('prerequisites') {
             steps {
-                sh "curl -o terraform.zip https://releases.hashicorp.com/terraform/0.12.19/terraform_0.12.19_linux_amd64.zip"
-                sh "unzip -o terraform.zip"
-                sh "pwd && ls -al"
-                sh "rm -rf terraform.zip"
-                sh "curl -sL https://aka.ms/InstallAzureCLIDeb | bash"
+                sh '''
+                    pwd && ls -al
+                    cd ft/aws2azure
+                    pwd && ls -al
+                    curl -o terraform.zip https://releases.hashicorp.com/terraform/0.12.19/terraform_0.12.19_linux_amd64.zip
+                    unzip -o terraform.zip
+                    pwd && ls -al
+                    rm -rf terraform.zip
+                '''
             }
         }
         stage('init and plan') {
             steps {
-                sh "terraform init"
-                sh "terraform plan"
+                sh '''
+                    pwd && ls -al
+                    cd ft/aws2azure
+                    ./terraform init
+                    ./terraform plan
+                '''
             }
         }
     }
